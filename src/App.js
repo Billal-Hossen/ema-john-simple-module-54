@@ -6,13 +6,17 @@ import Login from './components/Login/Login';
 import NotFound from './components/NotFound/NotFound';
 import OrderReview from './components/OrderReview/OrderReview';
 import PlaceOrder from './components/PlaceOrder/PlaceOrder';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Resistation from './components/Resistation/Resistation';
+import Shipping from './components/Shipping/Shipping';
 import Shop from './components/Shop/Shop';
+import AuthProvider from './contex/AuthProvider';
 
 function App() {
   return (
     <div>
-      <Router>
+     <AuthProvider>
+     <Router>
         <Header></Header>
         <Switch>
           <Route exact path="/">
@@ -33,14 +37,18 @@ function App() {
           <Route path="/resistation">
            <Resistation/>
           </Route>
-          <Route path="/placeorder">
+          <PrivateRoute path="/placeorder">
             <PlaceOrder></PlaceOrder>
-          </Route>
+          </PrivateRoute>
+          <PrivateRoute path="/shipping">
+           <Shipping/>
+          </PrivateRoute>
           <Route path="*">
             <NotFound></NotFound>
           </Route>
         </Switch>
       </Router>
+     </AuthProvider>
 
     </div>
   );
